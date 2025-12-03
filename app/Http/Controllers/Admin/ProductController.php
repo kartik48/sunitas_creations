@@ -48,6 +48,8 @@ class ProductController extends Controller
             'is_active' => 'boolean',
             'tags' => 'array',
             'tags.*' => 'exists:tags,id',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $validated['slug'] = Str::slug($request->name);
@@ -58,6 +60,19 @@ class ProductController extends Controller
 
         if ($request->has('tags')) {
             $product->tags()->attach($request->tags);
+        }
+
+        // Handle image uploads
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $index => $image) {
+                $path = $image->store('products', 'public');
+
+                $product->images()->create([
+                    'image_path' => $path,
+                    'is_primary' => $index === 0, // First image is primary
+                    'sort_order' => $index,
+                ]);
+            }
         }
 
         return redirect()->route('admin.products.index')
@@ -101,6 +116,8 @@ class ProductController extends Controller
             'is_active' => 'boolean',
             'tags' => 'array',
             'tags.*' => 'exists:tags,id',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $validated['slug'] = Str::slug($request->name);
@@ -113,6 +130,21 @@ class ProductController extends Controller
             $product->tags()->sync($request->tags);
         } else {
             $product->tags()->detach();
+        }
+
+        // Handle new image uploads
+        if ($request->hasFile('images')) {
+            $currentImageCount = $product->images()->count();
+
+            foreach ($request->file('images') as $index => $image) {
+                $path = $image->store('products', 'public');
+
+                $product->images()->create([
+                    'image_path' => $path,
+                    'is_primary' => $currentImageCount === 0 && $index === 0, // First image is primary if no images exist
+                    'sort_order' => $currentImageCount + $index,
+                ]);
+            }
         }
 
         return redirect()->route('admin.products.index')

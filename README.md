@@ -1,59 +1,171 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sunita's Creations
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+An e-commerce platform for authentic Warli and Rajasthani handicrafts, built with Laravel 12.
 
-## About Laravel
+## 🎨 About
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Sunita's Creations is a custom-built e-commerce website showcasing traditional Indian handicrafts. The platform features handcrafted items including dry fruit holders, wall decor, and festive items, all adorned with authentic Warli paintings and Rajasthani designs.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**A Gift of Love:** This project was built as a heartfelt gift for my mother, Sunita, who creates beautiful handicrafts inspired by traditional Warli and Rajasthani art. What started as a way to help her showcase and sell her creations online became an incredible learning journey in full-stack web development.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This project serves triple purpose:
+- A functional e-commerce platform for my mom's business
+- A demonstration of my web development skills for my portfolio
+- A tribute to preserving and promoting traditional Indian art forms
 
-## Learning Laravel
+## ✨ Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### Customer-Facing
+- **Warli-Inspired Homepage** - Traditional Indian aesthetic with terracotta color palette and geometric patterns
+- **Featured Products Showcase** - Highlighting handpicked artisan creations
+- **Category Browsing** - Organized product categories with visual navigation
+- **Product Image Gallery** - Multiple high-quality images per product
+- **Tag-Based Filtering** - Browse by design style (Warli, Rajasthani), materials, occasions
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Admin Panel
+- **Product Management** - Full CRUD operations for products
+- **Multi-Image Upload** - Upload multiple product images with primary image selection
+- **Category & Tag System** - Flexible organization and filtering
+- **Inventory Tracking** - Stock quantity management
+- **Featured Products** - Mark products for homepage display
+- **Rich Product Details** - Materials, dimensions, weight, descriptions
 
-## Laravel Sponsors
+### Technical Features
+- **Authentication System** - Secure login with admin roles via Laravel Breeze
+- **Image Storage** - Efficient file management with Laravel Storage
+- **Database Relationships** - Eloquent ORM with many-to-many tag relationships
+- **Responsive Design** - Mobile-first approach with Tailwind CSS
+- **SEO-Friendly** - Slug-based URLs and tag system
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🛠️ Tech Stack
 
-### Premium Partners
+- **Framework:** Laravel 12
+- **Frontend:** Blade Templates, Tailwind CSS
+- **Database:** SQLite (development)
+- **Authentication:** Laravel Breeze
+- **File Storage:** Laravel Storage with symbolic links
+- **Design:** Custom Warli-inspired CSS, SVG patterns
+- **Version Control:** Git & GitHub
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 📦 Installation
 
-## Contributing
+### Prerequisites
+- PHP 8.4+
+- Composer
+- Node.js (optional, for asset compilation)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Setup
 
-## Code of Conduct
+1. Clone the repository
+```bash
+git clone https://github.com/kartik48/sunitas_creations.git
+cd sunitas_creations
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. Install dependencies
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+3. Set up environment
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+4. Create database and run migrations
+```bash
+php artisan migrate
+```
 
-## License
+5. Seed sample data
+```bash
+php artisan db:seed --class=CategorySeeder
+php artisan db:seed --class=TagSeeder
+php artisan db:seed --class=AdminUserSeeder
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+6. Create storage link
+```bash
+php artisan storage:link
+```
+
+7. Start development server
+```bash
+php artisan serve
+```
+
+Visit: `http://localhost:8000`
+
+## 🔐 Admin Access
+
+**Email:** admin@sunitas-creations.com
+**Password:** admin123
+
+(Remember to change these credentials in production!)
+
+## 📂 Project Structure
+
+```
+├── app/
+│   ├── Http/Controllers/
+│   │   ├── Admin/ProductController.php
+│   │   └── HomeController.php
+│   ├── Models/
+│   │   ├── Product.php
+│   │   ├── Category.php
+│   │   ├── Tag.php
+│   │   └── ProductImage.php
+├── resources/views/
+│   ├── home.blade.php
+│   └── admin/products/
+├── database/
+│   ├── migrations/
+│   └── seeders/
+└── public/storage/ (symlinked)
+```
+
+## 🎯 Key Learning Outcomes
+
+This project demonstrates proficiency in:
+
+- **Laravel Ecosystem** - Routing, Eloquent ORM, migrations, seeders, middleware
+- **Authentication & Authorization** - Role-based access control
+- **File Uploads** - Multi-image handling and storage management
+- **Database Design** - Normalized schema with proper relationships
+- **Frontend Development** - Responsive UI with Tailwind CSS
+- **Git Workflow** - Meaningful commits and version control
+- **UI/UX Design** - Cultural aesthetic implementation (Warli art patterns)
+
+## 🚀 Roadmap
+
+- [ ] Product catalog/shop page
+- [ ] Individual product detail pages
+- [ ] Shopping cart functionality
+- [ ] Checkout and payment integration
+- [ ] Order management system
+- [ ] Customer reviews and ratings
+- [ ] Search functionality
+- [ ] Email notifications
+
+## 🎨 Design Inspiration
+
+The website's design draws from traditional Warli art - a tribal art form from Maharashtra, India. Key design elements include:
+
+- Geometric patterns (circles, triangles, squares)
+- Earthy color palette (terracotta, ochre, cream)
+- Stick figure motifs representing daily life
+- Traditional border patterns
+
+## 📝 License
+
+This project is for educational and portfolio purposes.
+
+## 👤 Developer
+
+**Kartik Mathur**
+GitHub: [@kartik48](https://github.com/kartik48)
+
+---
+
+Built with ❤️ for preserving traditional Indian handicrafts

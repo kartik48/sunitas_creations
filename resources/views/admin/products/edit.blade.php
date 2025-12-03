@@ -9,7 +9,7 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form action="{{ route('admin.products.update', $product) }}" method="POST">
+                    <form action="{{ route('admin.products.update', $product) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -75,6 +75,33 @@
                                 <x-input-label for="dimensions" :value="__('Dimensions')" />
                                 <x-text-input id="dimensions" class="block mt-1 w-full" type="text" name="dimensions" :value="old('dimensions', $product->dimensions)" placeholder="e.g., 10cm x 15cm x 5cm" />
                                 <x-input-error :messages="$errors->get('dimensions')" class="mt-2" />
+                            </div>
+
+                            <!-- Current Images -->
+                            @if($product->images->count() > 0)
+                                <div class="md:col-span-2">
+                                    <x-input-label :value="__('Current Images')" />
+                                    <div class="mt-2 grid grid-cols-3 md:grid-cols-5 gap-4">
+                                        @foreach($product->images as $image)
+                                            <div class="relative group">
+                                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="Product image" class="w-full h-24 object-cover rounded-lg border-2 {{ $image->is_primary ? 'border-indigo-500' : 'border-gray-200' }}">
+                                                @if($image->is_primary)
+                                                    <span class="absolute top-0 right-0 bg-indigo-500 text-white text-xs px-2 py-1 rounded-bl-lg">Primary</span>
+                                                @endif
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <p class="mt-1 text-sm text-gray-500">To replace images, upload new ones below.</p>
+                                </div>
+                            @endif
+
+                            <!-- Add New Images -->
+                            <div class="md:col-span-2">
+                                <x-input-label for="images" :value="__('Add New Images')" />
+                                <input type="file" id="images" name="images[]" multiple accept="image/*"
+                                    class="block mt-1 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" />
+                                <p class="mt-1 text-sm text-gray-500">Upload additional images. Max 2MB per image.</p>
+                                <x-input-error :messages="$errors->get('images')" class="mt-2" />
                             </div>
 
                             <!-- Tags -->

@@ -9,7 +9,7 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form action="{{ route('admin.products.store') }}" method="POST">
+                    <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -74,6 +74,15 @@
                                 <x-input-label for="dimensions" :value="__('Dimensions')" />
                                 <x-text-input id="dimensions" class="block mt-1 w-full" type="text" name="dimensions" :value="old('dimensions')" placeholder="e.g., 10cm x 15cm x 5cm" />
                                 <x-input-error :messages="$errors->get('dimensions')" class="mt-2" />
+                            </div>
+
+                            <!-- Product Images -->
+                            <div class="md:col-span-2">
+                                <x-input-label for="images" :value="__('Product Images')" />
+                                <input type="file" id="images" name="images[]" multiple accept="image/*"
+                                    class="block mt-1 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" />
+                                <p class="mt-1 text-sm text-gray-500">Upload multiple images. First image will be the primary image. Max 2MB per image.</p>
+                                <x-input-error :messages="$errors->get('images')" class="mt-2" />
                             </div>
 
                             <!-- Tags -->
