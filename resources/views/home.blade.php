@@ -254,18 +254,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="warli-border rounded-lg p-8 warli-dancers" style="background-color: var(--cream);">
-                    <div class="aspect-square flex items-center justify-center">
-                        <svg viewBox="0 0 200 200" class="w-full h-full">
-                            <!-- Simplified Warli art pattern -->
-                            <circle cx="100" cy="40" r="15" fill="var(--terracotta)" />
-                            <line x1="100" y1="55" x2="100" y2="120" stroke="var(--terracotta)" stroke-width="3" />
-                            <line x1="100" y1="75" x2="60" y2="90" stroke="var(--terracotta)" stroke-width="3" />
-                            <line x1="100" y1="75" x2="140" y2="90" stroke="var(--terracotta)" stroke-width="3" />
-                            <line x1="100" y1="120" x2="60" y2="160" stroke="var(--terracotta)" stroke-width="3" />
-                            <line x1="100" y1="120" x2="140" y2="160" stroke="var(--terracotta)" stroke-width="3" />
-                        </svg>
-                    </div>
+                <div class="warli-border rounded-lg overflow-hidden shadow-lg">
+                    <img src="{{ asset('worli_artwork.png') }}" alt="Authentic Warli Artwork" class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
