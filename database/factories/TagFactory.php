@@ -1,0 +1,28 @@
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tag>
+ */
+class TagFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        $name = fake()->word();
+        $types = ['design_style', 'material', 'occasion', 'general'];
+
+        return [
+            'name' => ucfirst($name),
+            'slug' => \Illuminate\Support\Str::slug($name),
+            'type' => fake()->randomElement($types),
+        ];
+    }
+}

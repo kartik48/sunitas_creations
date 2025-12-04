@@ -143,7 +143,7 @@
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 @foreach($categories as $category)
-                    <a href="#" class="group">
+                    <a href="{{ route('shop', ['category' => $category->id]) }}" class="group">
                         <div class="warli-border bg-cream p-6 rounded-lg text-center card-hover">
                             <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background-color: var(--terracotta);">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -175,19 +175,21 @@
                     @foreach($featuredProducts as $product)
                         <div class="bg-white rounded-lg overflow-hidden shadow-lg card-hover">
                             <!-- Product Image -->
-                            @if($product->primaryImage())
-                                <div class="h-64 overflow-hidden">
-                                    <img src="{{ asset('storage/' . $product->primaryImage()->image_path) }}"
-                                         alt="{{ $product->name }}"
-                                         class="w-full h-full object-cover">
-                                </div>
-                            @else
-                                <div class="h-64 bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
-                                    <svg class="w-24 h-24 text-orange-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                    </svg>
-                                </div>
-                            @endif
+                            <a href="{{ route('product.show', $product->slug) }}">
+                                @if($product->primaryImage())
+                                    <div class="h-64 overflow-hidden">
+                                        <img src="{{ asset('storage/' . $product->primaryImage()->image_path) }}"
+                                             alt="{{ $product->name }}"
+                                             class="w-full h-full object-cover hover:scale-110 transition-transform duration-300">
+                                    </div>
+                                @else
+                                    <div class="h-64 bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                                        <svg class="w-24 h-24 text-orange-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </div>
+                                @endif
+                            </a>
 
                             <div class="p-6">
                                 <div class="flex flex-wrap gap-1 mb-2">
@@ -210,7 +212,7 @@
                                     <span class="text-2xl font-bold" style="color: var(--terracotta);">
                                         ₹{{ number_format($product->price, 2) }}
                                     </span>
-                                    <a href="#" class="px-4 py-2 rounded-lg text-white font-semibold hover:opacity-90 transition" style="background-color: var(--terracotta);">
+                                    <a href="{{ route('product.show', $product->slug) }}" class="px-4 py-2 rounded-lg text-white font-semibold hover:opacity-90 transition" style="background-color: var(--terracotta);">
                                         View Details
                                     </a>
                                 </div>
