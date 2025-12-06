@@ -93,8 +93,11 @@
                 <!-- Main Image -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-4">
                     @if($product->images->count() > 0)
+                        @php
+                            $mainImage = $product->primaryImage() ?? $product->images->first();
+                        @endphp
                         <img id="mainImage"
-                             src="{{ asset('storage/' . $product->primaryImage()->image_path) }}"
+                             src="{{ asset('storage/' . $mainImage->image_path) }}"
                              alt="{{ $product->name }}"
                              class="w-full h-96 object-cover">
                     @else

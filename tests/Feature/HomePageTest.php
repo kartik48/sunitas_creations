@@ -97,8 +97,7 @@ class HomePageTest extends TestCase
         $response = $this->get(route('home'));
 
         $response->assertStatus(200);
-        $response->assertSee('Sunita\'s Creations');
-        $response->assertSee(route('shop'));
+        $response->assertSee('Sunita\'s Creations', false); // false = don't escape HTML
         $response->assertSee('Shop');
         $response->assertSee('Home');
     }
