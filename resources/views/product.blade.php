@@ -57,13 +57,22 @@
                     </a>
                     <span class="ml-3 text-sm" style="color: var(--warm-brown);">Authentic Warli & Rajasthani Art</span>
                 </div>
-                <div class="hidden md:flex space-x-8">
+                <div class="hidden md:flex space-x-8 items-center">
                     <a href="{{ route('home') }}" class="text-gray-700 hover:text-orange-600 font-medium">Home</a>
                     <a href="{{ route('shop') }}" class="text-gray-700 hover:text-orange-600 font-medium">Shop</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-600 font-medium">About</a>
+                    <a href="{{ route('cart.index') }}" class="text-gray-700 hover:text-orange-600 font-medium relative">
+                        <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                        @if($cartCount > 0)
+                            <span class="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 text-xs font-bold text-white rounded-full" style="background-color: var(--terracotta);">
+                                {{ $cartCount }}
+                            </span>
+                        @endif
+                    </a>
                     @auth
                         @if(auth()->user()->is_admin)
-                            <a href="{{ route('admin.products.index') }}" class="text-orange-600 hover:text-orange-800 font-medium">Admin Panel</a>
+                            <a href="{{ route('admin.products.index') }}" class="text-gray-700 hover:text-orange-600 font-medium">Admin Panel</a>
                         @endif
                         <a href="{{ route('dashboard') }}" class="text-gray-700 hover:text-orange-600 font-medium">Dashboard</a>
                     @else
@@ -197,12 +206,36 @@
                     </div>
                 </div>
 
-                <!-- Add to Cart Button -->
+                <!-- Add to Cart Section -->
                 @if($product->stock_quantity > 0)
-                    <button class="w-full py-4 rounded-lg text-white font-bold text-lg hover:opacity-90 transition"
-                            style="background-color: var(--terracotta);">
-                        Add to Cart
-                    </button>
+                    <form action="{{ route('cart.add', $product) }}" method="POST" class="space-y-4">
+                        @csrf
+
+                        <!-- Quantity Selector -->
+                        <div class="flex items-center space-x-4">
+                            <label for="quantity" class="text-lg font-semibold" style="color: var(--warm-brown);">
+                                Quantity:
+                            </label>
+                            <input type="number"
+                                   id="quantity"
+                                   name="quantity"
+                                   value="1"
+                                   min="1"
+                                   max="{{ $product->stock_quantity }}"
+                                   class="w-24 px-4 py-2 border-2 rounded-lg text-center text-lg font-semibold"
+                                   style="border-color: var(--terracotta);">
+                            <span class="text-sm text-gray-600">
+                                ({{ $product->stock_quantity }} available)
+                            </span>
+                        </div>
+
+                        <!-- Add to Cart Button -->
+                        <button type="submit"
+                                class="w-full py-4 rounded-lg text-white font-bold text-lg hover:opacity-90 transition"
+                                style="background-color: var(--terracotta);">
+                            Add to Cart
+                        </button>
+                    </form>
                 @else
                     <button disabled class="w-full py-4 rounded-lg text-white font-bold text-lg opacity-50 cursor-not-allowed"
                             style="background-color: var(--terracotta);">

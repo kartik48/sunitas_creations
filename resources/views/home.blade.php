@@ -93,14 +93,22 @@
                     </h1>
                     <span class="ml-3 text-sm" style="color: var(--warm-brown);">Authentic Warli & Rajasthani Art</span>
                 </div>
-                <div class="hidden md:flex space-x-8">
+                <div class="hidden md:flex space-x-8 items-center">
                     <a href="{{ route('home') }}" class="text-gray-700 hover:text-orange-600 font-medium">Home</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-600 font-medium">Shop</a>
-                    <a href="#categories" class="text-gray-700 hover:text-orange-600 font-medium">Categories</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-600 font-medium">About</a>
+                    <a href="{{ route('shop') }}" class="text-gray-700 hover:text-orange-600 font-medium">Shop</a>
+                    <a href="{{ route('cart.index') }}" class="text-gray-700 hover:text-orange-600 font-medium relative">
+                        <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                        @if($cartCount > 0)
+                            <span class="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 text-xs font-bold text-white rounded-full" style="background-color: var(--terracotta);">
+                                {{ $cartCount }}
+                            </span>
+                        @endif
+                    </a>
                     @auth
                         @if(auth()->user()->is_admin)
-                            <a href="{{ route('admin.products.index') }}" class="text-orange-600 hover:text-orange-800 font-medium">Admin Panel</a>
+                            <a href="{{ route('admin.products.index') }}" class="text-gray-700 hover:text-orange-600 font-medium">Admin Panel</a>
                         @endif
                         <a href="{{ route('dashboard') }}" class="text-gray-700 hover:text-orange-600 font-medium">Dashboard</a>
                     @else
