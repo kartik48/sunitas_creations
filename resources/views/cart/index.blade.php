@@ -180,10 +180,10 @@
                             </div>
                         </div>
 
-                        <button class="w-full py-3 rounded-lg text-white font-bold text-lg hover:opacity-90 transition mb-3"
-                                style="background-color: var(--terracotta);">
+                        <a href="{{ route('checkout.show') }}" class="block w-full py-3 rounded-lg text-white font-bold text-lg hover:opacity-90 transition mb-3 text-center"
+                           style="background-color: var(--terracotta);">
                             Proceed to Checkout
-                        </button>
+                        </a>
 
                         <a href="{{ route('shop') }}" class="block text-center text-sm text-gray-600 hover:text-orange-600">
                             Continue Shopping

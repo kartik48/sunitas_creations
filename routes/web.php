@@ -16,6 +16,14 @@ Route::patch('/cart/{cartItem}', [App\Http\Controllers\CartController::class, 'u
 Route::delete('/cart/{cartItem}', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
 Route::delete('/cart', [App\Http\Controllers\CartController::class, 'clear'])->name('cart.clear');
 
+// Checkout routes (requires authentication)
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'show'])->name('checkout.show');
+    Route::post('/checkout', [App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('/checkout/confirmation/{order}', [App\Http\Controllers\CheckoutController::class, 'confirmation'])->name('checkout.confirmation');
+    Route::get('/orders', [App\Http\Controllers\CheckoutController::class, 'orders'])->name('orders.index');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
